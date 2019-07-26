@@ -1,7 +1,3 @@
-#!/usr/bin/python -u
-# coding=utf-8
-# "DATASHEET": http://cl.ly/ekot
-# https://gist.github.com/kadamski/92653913a53baf9dd1a8
 from __future__ import print_function
 import serial, struct, sys, time, json, subprocess
 
@@ -16,7 +12,7 @@ MODE_ACTIVE = 0
 MODE_QUERY = 1
 PERIOD_CONTINUOUS = 0
 
-JSON_FILE = '/var/www/html/aqi.json'
+JSON_FILE = '/var/www/html/air-raspberry-graph/data.json'
 
 MQTT_HOST = ''
 MQTT_TOPIC = '/weather/particulatematter'
@@ -137,8 +133,9 @@ if __name__ == "__main__":
         data.append(jsonrow)
 
         # save it
-        with open(JSON_FILE, 'w') as outfile:
+        with open('data.json', 'w') as outfile:
             json.dump(data, outfile)
+            copyfile('data.json', JSON_FILE)
 
         if MQTT_HOST != '':
             pub_mqtt(jsonrow)
