@@ -4,6 +4,7 @@ from shutil import copyfile
 JSON_PATH = '/var/www/html/portfolio/air-raspberry-graph/data.json'
 JSON_FILE = 'data.json'
 CMD_QUERY_DATA = 4
+data = []
 
 ser = serial.Serial()
 ser.port = "/dev/ttyUSB0"
@@ -52,6 +53,7 @@ def process_data(d):
 
 
 def writeToJSONFile(datetime, pms):
+    print(data)
     try:
         with open(JSON_FILE) as json_data:
             data = json.load(json_data)
