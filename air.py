@@ -58,6 +58,9 @@ def writeToJSONFile(datetime, pms):
     except IOError as e:
         data = []
 
+    for x in range(len(data)):
+        print(data[x])
+
     jsonrow = {'pm25': pms[0], 'pm10': pms[1], 'datetime': datetime}
     data.append(jsonrow)
 
