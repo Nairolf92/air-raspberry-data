@@ -52,16 +52,11 @@ def process_data(d):
 
 
 def writeToJSONFile(datetime, pms):
-    try:
-        with open(JSON_FILE) as json_data:
-            data = json.load(json_data)
-    except IOError as e:
-        data = []
-
-    for x in range(len(data)):
-        print(data[x])
-
-    print(data)
+    print("datetime" + datetime)
+    for x in range(len(pms)):
+        print(pms[x])
+    with open('data.json') as json_file:
+        data = json.load(json_file)
 
     jsonrow = {'pm25': pms[0], 'pm10': pms[1], 'datetime': datetime}
     data.append(jsonrow)
