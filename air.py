@@ -51,22 +51,22 @@ def process_data(d):
 	return [pm25, pm10]
 
 
-def writeToJSONFile(key, value):
-	print("key"+key)
-	print("value"+value)
+def writeToJSONFile(datetime, pms):
+	print("datetime"+datetime)
+	print("pms"+pms)
 	with open('data.json') as json_file:
-		json_decoded = json.load(json_file)
-		print(json_decoded)
+		data = json.load(json_file)
 
-	json_decoded[key] = value
+	jsonrow = {'pm25': pms[0], 'pm10': pms[1], 'datetime': datetime}
+	data.append(jsonrow)
 
 	with open('data.json', 'w') as json_file:
-		json.dump(json_decoded, json_file, sort_keys=True)
+		json.dump(data, json_file, sort_keys=True)
 
 
 def getDate():
-	date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-	return date
+	todayDatetime = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+	return todayDatetime
 
 
 # Uncomment the copy() function if necessary
