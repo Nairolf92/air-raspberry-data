@@ -52,11 +52,11 @@ def process_data(d):
 
 
 def writeToJSONFile(datetime, pms):
-    print("datetime" + datetime)
-    for x in range(len(pms)):
-        print(pms[x])
-    with open('data.json') as json_file:
-        data = json.load(json_file)
+    try:
+        with open(JSON_FILE) as json_data:
+            data = json.load(json_data)
+    except IOError as e:
+        data = []
 
     jsonrow = {'pm25': pms[0], 'pm10': pms[1], 'datetime': datetime}
     data.append(jsonrow)
@@ -78,7 +78,7 @@ def writeCopyAndSleep():
 
 
 def createJSON():
-    data = {}
+    data = []
     with open(JSON_FILE, 'w') as json_file:
         json.dump(data, json_file)
 
