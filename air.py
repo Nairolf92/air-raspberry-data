@@ -53,7 +53,8 @@ def process_data(d):
 
 def writeToJSONFile(datetime, pms):
 	print("datetime"+datetime)
-	print("pms"+pms)
+	for x in range(len(pms)):
+		print("pms"+pms[x])
 	with open('data.json') as json_file:
 		data = json.load(json_file)
 
@@ -64,7 +65,7 @@ def writeToJSONFile(datetime, pms):
 		json.dump(data, json_file, sort_keys=True)
 
 
-def getDate():
+def getDateTime():
 	todayDatetime = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 	return todayDatetime
 
@@ -72,7 +73,7 @@ def getDate():
 # Uncomment the copy() function if necessary
 def writeCopyAndSleep():
 	while True:
-		writeToJSONFile(getDate(), getPMS())
+		writeToJSONFile(getDateTime(), getPMS())
 		copy()
 		time.sleep(3600)
 
