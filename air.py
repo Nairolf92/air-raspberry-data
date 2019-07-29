@@ -53,8 +53,10 @@ def process_data(d):
 
 def writeToJSONFile(datetime, pms):
     print("datetime" + datetime)
+    data = []
     for x in range(len(pms)):
         print(pms[x])
+
     with open('data.json') as json_file:
         data = json.load(json_file)
 
