@@ -1,7 +1,5 @@
 import os, serial, time, json, datetime, struct
-from shutil import copyfile
 
-JSON_PATH = '/var/www/html/portfolio/air-raspberry-graph/data.json'
 JSON_FILE = 'data.json'
 CMD_QUERY_DATA = 4
 
@@ -61,7 +59,7 @@ def writeToJSONFile(datetime, pms):
     jsonrow = {'pm25': pms[0], 'pm10': pms[1], 'datetime': datetime}
     data.append(jsonrow)
 
-    with open('data.json', 'w') as json_file:
+    with open(JSON_FILE, 'w') as json_file:
         json.dump(data, json_file, sort_keys=True)
 
 
@@ -70,10 +68,9 @@ def getDateTime():
     return todayDatetime
 
 
-def writeCopyAndSleep():
+def writeAndSleep():
     while True:
         writeToJSONFile(getDateTime(), getPMS())
-        copyfile(JSON_FILE, JSON_PATH)
         time.sleep(3600)
 
 
@@ -83,10 +80,10 @@ def createJSON():
         json.dump(data, json_file)
 
 
-if os.path.isfile('data.json'):
+if os.path.isfile(JSON_FILE):
     print('file found')
-    writeCopyAndSleep()
+    writeAndSleep()
 else:
     print('file not found')
     createJSON()
-    writeCopyAndSleep()
+    writeAndSleep()
