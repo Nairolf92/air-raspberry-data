@@ -4,7 +4,7 @@ JSON_FILE = 'data.json'
 CMD_QUERY_DATA = 4
 
 ser = serial.Serial()
-ser.port = "/dev/ttyUSB0"
+ser.port = "/dev/ttyUSB1"
 ser.baudrate = 9600
 
 ser.open()
